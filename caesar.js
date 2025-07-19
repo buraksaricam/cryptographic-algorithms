@@ -1,8 +1,8 @@
-function indexBul(deger, indeks) // index sırasını bulmak için
+function findIndex(value, indexArray) // to find index position
 {
-    for(let i=0; i<indeks.length; i++) {
-        if(indeks[i] === deger){
-           return i;
+    for (let i = 0; i < indexArray.length; i++) {
+        if (indexArray[i] === value) {
+            return i;
         }
     }
     return -1;
@@ -12,28 +12,28 @@ function mod(a, b) {
     return ((a % b) + b) % b;
 }
 
-let alfabe = "abcçdefgğhıijklmnoöprsştuüvyz".split('');
+let alphabet = "abcçdefgğhıijklmnoöprsştuüvyz".split('');
 
-let anahtar = 3;
+let key = 3;
 
-let duzmetin = "revolution".split(""); // Şifrelenmek istenen metin
+let plainText = "revolution".split("");
 
-// şifreleme
-process.stdout.write("Şifrelenmiş metin:\n");
-for(let i = 0; i < duzmetin.length; i++) {
-    let alfabedebul = indexBul(duzmetin[i], alfabe);
-    let sifreliIndex = mod(alfabedebul + anahtar, alfabe.length);
-    process.stdout.write(alfabe[sifreliIndex]);
+// Encryption
+process.stdout.write("Encrypted text:\n");
+for (let i = 0; i < plainText.length; i++) {
+    let indexInAlphabet = findIndex(plainText[i], alphabet);
+    let encryptedIndex = mod(indexInAlphabet + key, alphabet.length);
+    process.stdout.write(alphabet[encryptedIndex]);
 }
 process.stdout.write("\n");
 
-// Çözme
-process.stdout.write("Çözülmüş metin:\n");
-let sifreliMetin = "tğaroyvlrp".split(""); // örnek şifreli metin (revolution şifresi)
+// Decryption
+process.stdout.write("Decrypted text:\n");
+let encryptedText = "tğaroyvlrp".split("");
 
-for(let i = 0; i < sifreliMetin.length; i++) {
-    let alfabedebul = indexBul(sifreliMetin[i], alfabe);
-    let cozulmusIndex = mod(alfabedebul - anahtar, alfabe.length);
-    process.stdout.write(alfabe[cozulmusIndex]);
+for (let i = 0; i < encryptedText.length; i++) {
+    let indexInAlphabet = findIndex(encryptedText[i], alphabet);
+    let decryptedIndex = mod(indexInAlphabet - key, alphabet.length);
+    process.stdout.write(alphabet[decryptedIndex]);
 }
 process.stdout.write("\n");
